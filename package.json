@@ -1,0 +1,38 @@
+{
+    "name": "@nil-/jwalk_mono",
+    "description": "mono repo for jwalk",
+    "author": {
+        "email": "njaldea@gmail.com",
+        "name": "Neil Aldea"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/njaldea/jwalk.git"
+    },
+    "scripts": {
+        "build": "turbo run build",
+        "check": "turbo run check",
+        "package": "turbo run package",
+        "test:unit": "turbo run test:unit -- run",
+        "dev:jwalk": "turbo run dev --filter=@nil-/jwalk",
+        "format": "prettier --write --plugin prettier-plugin-svelte .",
+        "lint": "turbo run lint",
+        "clean": "pnpm -r exec rm -rf node_modules build package coverage .svelte-kit .turbo .vercel && rm -rf node_modules graphs",
+        "commit:vercel": "git commit -m \"[vercel]: update\"",
+        "graph": "./scripts/graph"
+    },
+    "devDependencies": {
+        "@changesets/cli": "^2.26.2",
+        "@svitejs/changesets-changelog-github-compact": "^1.1.0",
+        "prettier": "^3.0.2",
+        "prettier-plugin-svelte": "^3.0.3",
+        "svelte": "^4.2.0",
+        "turbo": "^1.10.12"
+    },
+    "engines": {
+        "node": ">=18.16.0",
+        "pnpm": ">=8.6.2"
+    },
+    "type": "module",
+    "private": true
+}

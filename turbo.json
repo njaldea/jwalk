@@ -1,0 +1,28 @@
+{
+    "$schema": "https://turbo.build/schema.json",
+    "pipeline": {
+        "test:unit": {
+            "dependsOn": ["sync", "^package"]
+        },
+        "build": {
+            "dependsOn": ["sync", "^package"]
+        },
+        "check": {
+            "dependsOn": ["sync", "^package"]
+        },
+        "dev": {
+            "persistent": true,
+            "dependsOn": ["sync", "^package"]
+        },
+        "package": {
+            "dependsOn": ["sync"],
+            "outputs": ["./package/**"]
+        },
+        "sync": {
+            "outputs": ["./svelte-kit/**"]
+        },
+        "lint": {
+            "dependsOn": ["sync", "^package"]
+        }
+    }
+}

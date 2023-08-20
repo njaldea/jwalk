@@ -1,0 +1,36 @@
+name: Changesets
+on:
+    push:
+        branches:
+            - master
+env:
+    CI: true
+    PNPM_CACHE_FOLDER: .pnpm-store
+jobs:
+    publish:
+        timeout-minutes: 15
+        runs-on: ubuntu-latest
+        steps:
+            - name: checkout code repository
+              uses: actions/checkout@v3
+            - name: setup PNPM
+              uses: pnpm/action-setup@v2
+              with:
+                  version: 8.6.9
+            - name: setup NODEjs
+              uses: actions/setup-node@v3
+              with:
+                  node-version: 18.16
+                  cache: "pnpm"
+            - name: install dependencies
+              run: pnpm install
+            - name: create and publish versions
+              uses: changesets/action@v1
+              with:
+                  commit: "[publish]: version bump"
+                  version: ./scripts/changeset
+                  title: "Version Bump (publish)"
+                  publish: ./scripts/publish
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                  NPM_TOKEN: ${{ secrets.NPM_TOKEN }}

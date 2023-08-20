@@ -1,0 +1,41 @@
+{
+    "editor.fontLigatures": true,
+    "editor.maxTokenizationLineLength": 2500,
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": false
+    },
+    "explorer.fileNesting.expand": true,
+    "explorer.fileNesting.patterns": {
+        "*.js": "${capture}.js.map, ${capture}.min.js, ${capture}.d.ts, ${capture}.test.js",
+        "*.ts": "${capture}.js, ${capture}.test.ts",
+        ".gitignore": ".*ignore",
+        ".npmrc": ".*rc, .eslintrc.cjs",
+        "README.md": "*.md, LICENSE",
+        "package.json": "package-lock.json, turbo.json, pnpm-*.yaml",
+        "svelte.config.js": "*.config.ts, *.config.js, tsconfig.json"
+    },
+    "files.associations": {
+        "*.mdsvelte": "svelte"
+    },
+    "svelte.enable-ts-plugin": true,
+    "svelte.plugin.svelte.defaultScriptLanguage": "ts",
+    "[svelte]": {
+        "editor.defaultFormatter": "svelte.svelte-vscode"
+    },
+    "eslint.probe": ["javascript", "typescript", "svelte", "markdown"],
+    "eslint.enable": true,
+    "npm.packageManager": "pnpm",
+    "npm.scriptHover": true,
+    "npm.autoDetect": "on",
+    "npm.fetchOnlinePackageInfo": true,
+    "eslint.workingDirectories": [
+        "./projects/doc",
+        "./projects/doc-kit",
+        "./projects/3d",
+        "./projects/gate",
+        "./projects/rebundler",
+        "./projects/jwalk"
+    ],
+    "js/ts.implicitProjectConfig.checkJs": true,
+    "editor.inlayHints.enabled": "offUnlessPressed"
+}

@@ -1,0 +1,9 @@
+{
+    "recommendations": [
+        "usernamehw.errorlens",
+        "svelte.svelte-vscode",
+        "dbaeumer.vscode-eslint",
+        "vscode-icons-team.vscode-icons",
+        "orta.vscode-twoslash-queries"
+    ]
+}
