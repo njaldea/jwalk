@@ -81,4 +81,4 @@ j.destroy();
 -   Currently, schema validation is expected to be done by the user before `build`/`update`.<br/>
     Some considerations is to add `zod` json validation before execution of each node.
 
-For more information see [link](https://mono-jwalk.vercel.app)
+For more information see [link](https://jwalk.vercel.app)

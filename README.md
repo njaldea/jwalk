@@ -6,9 +6,9 @@ This repository is a collection of library surrounding JWalk
 
 ## Workspaces
 
-| Workspace                          | Changelog                                   | Deployment                                 |
-| ---------------------------------- | ------------------------------------------- | ------------------------------------------ |
-| [projects/jwalk](./projects/jwalk) | [Changelog](./projects/jwalk/CHANGELOG.md)  | [@nil-/jwalk](https://mono-doc.vercel.app) |
+| Workspace                          | Changelog                                  | Deployment                              |
+| ---------------------------------- | ------------------------------------------ | --------------------------------------- |
+| [projects/jwalk](./projects/jwalk) | [Changelog](./projects/jwalk/CHANGELOG.md) | [@nil-/jwalk](https://jwalk.vercel.app) |
 
 ## Scripts
 

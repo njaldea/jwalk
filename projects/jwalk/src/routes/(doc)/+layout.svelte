@@ -22,8 +22,8 @@
 <DocLayout {settings} {sorter} {renamer}>
     <svelte:fragment slot="title">
         <Icon
-            title="Open @nil-/mono repo: https://github.com/njaldea/mono"
-            on:click={() => window.open("https://github.com/njaldea/mono", "_blank")}
+            title="Open @nil-/jwalk repo: https://github.com/njaldea/jwalk"
+            on:click={() => window.open("https://github.com/njaldea/jwalk", "_blank")}
         >
             <Nil />
         </Icon>
