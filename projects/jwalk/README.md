@@ -17,40 +17,40 @@ import { jwalker } from "@nil-/jwalk";
 
 const j = jwalker()
     .node("Boolean", "boolean", {
-        action: (context, { value }) => {
-            console.log("[BOOL] INIT", value);
+        action: ({ value }) => {
+            console.log("[BOOL]", "INIT", value);
             return {
-                update: (value) => console.log("[BOOL] UPDATE", value),
-                destroy: () => console.log("[BOOL] DESTROY")
+                update: (value) => console.log("[BOOL]", "UPDATE", value),
+                destroy: () => console.log("[BOOL]", "DESTROY", "-")
             };
         }
     })
     .node("Number", "number", {
-        action: (context, { value }) => {
-            console.log("[Number] INIT", value);
+        action: ({ value }) => {
+            console.log("[Number]", "INIT", value);
             return {
-                update: (value) => console.log("[Number] UPDATE", value),
-                destroy: () => console.log("[Number] DESTROY")
+                update: (value) => console.log("[Number]", "UPDATE", value),
+                destroy: () => console.log("[Number]", "DESTROY", "-")
             };
         }
     })
     .node("ROOT", "tuple", {
         content: ["Boolean", "Number"],
-        action: (context, { value, auto }) => {
-            console.log("[ROOT] INIT", value);
+        action: ({ value, auto }) => {
+            console.log("[ROOT]", "INIT", value);
             const { update, destroy } = auto(
-                () => context,
+                () => {},
                 () => {},
                 value
             );
             return {
                 update: (value) => {
-                    console.log("[ROOT] UPDATE", value);
+                    console.log("[ROOT]", "UPDATE", value);
                     update(value);
                 },
                 destroy: () => {
                     destroy();
-                    console.log("[ROOT] DESTROY");
+                    console.log("[ROOT]", "DESTROY", "-");
                 }
             };
         }

@@ -28,14 +28,7 @@
     "npm.scriptHover": true,
     "npm.autoDetect": "on",
     "npm.fetchOnlinePackageInfo": true,
-    "eslint.workingDirectories": [
-        "./projects/doc",
-        "./projects/doc-kit",
-        "./projects/3d",
-        "./projects/gate",
-        "./projects/rebundler",
-        "./projects/jwalk"
-    ],
+    "eslint.workingDirectories": ["./projects/jwalk"],
     "js/ts.implicitProjectConfig.checkJs": true,
     "editor.inlayHints.enabled": "offUnlessPressed"
 }
