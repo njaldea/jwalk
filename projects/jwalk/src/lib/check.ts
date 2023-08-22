@@ -87,11 +87,11 @@ const validateTypeContent = (
 };
 
 export const check = {
-    type: (
+    type: <Context>(
         type: string,
         detail: readonly { type: string; content?: readonly string[] | string }[],
         primes: Record<string, unknown>,
-        nodes: Record<string, unknown>
+        nodes: Record<string, TypeDetail<Context>>
     ) => {
         if (type in primes || type in nodes || grouptype.includes(type)) {
             throw new Error(`[${type}] already registered`);

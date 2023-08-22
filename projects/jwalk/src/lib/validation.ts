@@ -4,6 +4,21 @@ export const builtin = {
     string: (v: unknown) => "string" === typeof v
 } as const;
 
+const isObject = (v: unknown): v is Record<string, unknown> => {
+    return "object" === typeof v && !Array.isArray(v) && null != v;
+};
+
+const isArray = (v: unknown): v is unknown[] => {
+    return Array.isArray(v);
+};
+
+// eslint-disable-next-line func-style
+function* tie(first: readonly unknown[], second: readonly string[]) {
+    for (let i = 0; i < first.length; ++i) {
+        yield [first[i], second[i]] as const;
+    }
+}
+
 export const validate = {
     type: (
         detail: readonly { type: string; content?: readonly string[] | string }[],
@@ -12,54 +27,31 @@ export const validate = {
         const validators: ((v: unknown) => boolean)[] = [];
         for (const unit of detail) {
             if ("list" === unit.type) {
-                validators.push((v) => {
-                    if (Array.isArray(v)) {
-                        return !v.some((i) => primes[unit.content as string](i));
-                    }
-                    return false;
-                });
+                const content = unit.content as string;
+                validators.push((v) => isArray(v) && v.every((i) => primes[content](i)));
             } else if ("map" === unit.type) {
-                validators.push((v) => {
-                    if ("object" === typeof v && !Array.isArray(v) && null != v) {
-                        return !Object.values(v).some((i) => primes[unit.content as string](i));
-                    }
-                    return false;
-                });
+                const content = unit.content as string;
+                validators.push(
+                    (v) => isObject(v) && Object.values(v).every((i) => primes[content](i))
+                );
             } else if ("tuple" === unit.type) {
-                validators.push((v) => {
-                    const content = unit.content as readonly string[];
-                    if (Array.isArray(v) && v.length === content.length) {
-                        for (let i = 0; i < content.length; ++i) {
-                            if (!primes[content[i]](v[i])) {
-                                return false;
-                            }
-                        }
-                        return true;
-                    }
-                    return false;
-                });
+                const content = unit.content as readonly string[];
+                validators.push(
+                    (v) =>
+                        isArray(v) &&
+                        v.length === content.length &&
+                        [...tie(v, content)].every(([a, b]) => primes[b](a))
+                );
             } else if ("object" === unit.type) {
-                validators.push((v) => {
-                    const content = unit.content as readonly string[];
-                    if (
-                        "object" === typeof v &&
-                        !Array.isArray(v) &&
-                        null != v &&
-                        Object.keys(v).length === content.length
-                    ) {
-                        const alias = v as Record<string, unknown>;
-                        for (const cc of content) {
-                            const [key, value] = cc.split(":");
-                            if (!primes[value](alias[key])) {
-                                return false;
-                            }
-                        }
-                        return true;
-                    }
-                    return false;
-                });
+                const content = unit.content as readonly string[];
+                validators.push(
+                    (v) =>
+                        isObject(v) &&
+                        Object.keys(v).length === content.length &&
+                        content.map((c) => c.split(":")).every(([key, t]) => primes[t](v[key]))
+                );
             } else {
-                validators.push((v) => primes[unit.content as string](v));
+                validators.push((v) => primes[unit.type](v));
             }
         }
 
